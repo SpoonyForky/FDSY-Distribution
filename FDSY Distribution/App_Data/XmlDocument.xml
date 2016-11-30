@@ -481,9 +481,15 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BarsApiController.GetBars">
+            <summary>
+            Get's all Bars
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:FDSY_Distribution.Controllers.ApiControllers.BarsApiController.GetBar(System.Int32)">
             <summary>
-            Gets a Bar
+            Gets a Bar based off of the id
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -558,6 +564,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BreweriesApiController.PutBrewery(System.Int32,FDSY_Distribution.Models.Brewery)">
+            <summary>
+            PUT's a Brewary
+            </summary>
+            <param name="id"></param>
+            <param name="brewery"></param>
+            <returns></returns>
+        </member>
         <member name="M:FDSY_Distribution.Controllers.ApiControllers.BreweriesApiController.PostBrewery(FDSY_Distribution.Models.Brewery)">
             <summary>
             POST's a new Brewary
@@ -567,7 +581,7 @@
         </member>
         <member name="M:FDSY_Distribution.Controllers.ApiControllers.BreweriesApiController.DeleteBrewery(System.Int32)">
             <summary>
-            DELET's a Brewarie based off of the id
+            DELETE's a Brewarie based off of the id
             </summary>
             <param name="id"></param>
             <returns></returns>

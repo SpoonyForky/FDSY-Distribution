@@ -17,7 +17,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         private BeerContext db = new BeerContext();
 
         /// <summary>
-        /// GET's Brewaries
+        /// Returns all Breweries
         /// </summary>
         /// <returns></returns>
         // GET: api/BreweriesApi
@@ -27,7 +27,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// GET's a Brewary based off of the id
+        /// Returns a brewery based on ID
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -45,7 +45,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// PUT's a Brewary
+        /// Edits an existing brewery with new field values
         /// </summary>
         /// <param name="id"></param>
         /// <param name="brewery"></param>
@@ -86,7 +86,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// POST's a new Brewary
+        /// Creates a new brewery
         /// </summary>
         /// <param name="brewery"></param>
         /// <returns></returns>
@@ -107,7 +107,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
 
 
         /// <summary>
-        /// DELETE's a Brewarie based off of the id
+        /// Deletes a brewery based on the id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

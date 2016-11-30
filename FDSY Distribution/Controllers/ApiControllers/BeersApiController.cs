@@ -12,14 +12,17 @@ using FDSY_Distribution.Models;
 
 namespace FDSY_Distribution.Controllers.ApiControllers
 {
+    /// <summary>
+    /// Controller that facilitates actions on Beer Objects
+    /// </summary>
     public class BeersApiController : ApiController
     {
         private BeerContext db = new BeerContext();
 
         /// <summary>
-        /// Get's a new Beer
+        /// Gets all beers
         /// </summary>
-        /// <returns></returns>
+        /// <returns>All beers</returns>
         // GET: api/BeersApi
         public IQueryable<Beer> GetBeers()
         {
@@ -27,7 +30,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// Return's a Beer based on the Id
+        /// Returns a Beer based on the Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -45,7 +48,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// PUTs a Beer
+        /// Edits an existing Beer
         /// </summary>
         /// <param name="id"></param>
         /// <param name="beer"></param>
@@ -86,7 +89,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// POST's a beer
+        /// Creates a new beer
         /// </summary>
         /// <param name="beer"></param>
         /// <returns></returns>
@@ -106,7 +109,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// Delete's a Beer based on the ID
+        /// Deletes a Beer based on the ID
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -125,7 +128,6 @@ namespace FDSY_Distribution.Controllers.ApiControllers
 
             return Ok(beer);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -134,7 +136,6 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             }
             base.Dispose(disposing);
         }
-
         private bool BeerExists(int id)
         {
             return db.Beers.Count(e => e.BeerId == id) > 0;

@@ -17,7 +17,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         private BeerContext db = new BeerContext();
 
         /// <summary>
-        /// Get's all Bars
+        /// Returns all bars
         /// </summary>
         /// <returns></returns>
         // GET: api/BarsApi
@@ -27,7 +27,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// Gets a Bar based off of the id
+        /// Returns a Bar based off of the id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -46,7 +46,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
 
 
         /// <summary>
-        /// Put's a new Bar
+        /// Edits an existing bar
         /// </summary>
         /// <param name="id"></param>
         /// <param name="bar"></param>
@@ -87,7 +87,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// POST's a new Bar
+        /// Creates a new bar
         /// </summary>
         /// <param name="bar"></param>
         /// <returns></returns>
@@ -107,7 +107,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// Delete's a bar
+        /// Deletes a bar based on ID
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
