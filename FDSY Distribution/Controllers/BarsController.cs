@@ -13,12 +13,24 @@ namespace FDSY_Distribution.Controllers
     
     public class BarsController : Controller
     {
-        private BeerContext db = new BeerContext();
+        //private BeerContext db = new BeerContext();
+
+        private IRepository<Bar> repo;
+
+        public BarsController(IRepository<Bar> _repo)
+        {
+            this.repo = _repo;
+        }
+
+        public BarsController() : this(new BarRepository())
+        {
+
+        }
 
         // GET: Bars
         public ActionResult Index()
         {
-            return View(db.Bars.ToList());
+            return View(repo.Get());
         }
 
         // GET: Bars/Details/5
@@ -28,7 +40,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bar bar = db.Bars.Find(id);
+            Bar bar = repo.Get(id);
             if (bar == null)
             {
                 return HttpNotFound();
@@ -51,8 +63,7 @@ namespace FDSY_Distribution.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Bars.Add(bar);
-                db.SaveChanges();
+                repo.Post(bar);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +77,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bar bar = db.Bars.Find(id);
+            Bar bar = repo.Get(id);
             if (bar == null)
             {
                 return HttpNotFound();
@@ -83,8 +94,7 @@ namespace FDSY_Distribution.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bar).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.Put(bar);
                 return RedirectToAction("Index");
             }
             return View(bar);
@@ -97,7 +107,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bar bar = db.Bars.Find(id);
+            Bar bar = repo.Get(id);
             if (bar == null)
             {
                 return HttpNotFound();
@@ -110,9 +120,7 @@ namespace FDSY_Distribution.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Bar bar = db.Bars.Find(id);
-            db.Bars.Remove(bar);
-            db.SaveChanges();
+            repo.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -120,7 +128,7 @@ namespace FDSY_Distribution.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+              //  db.Dispose();
             }
             base.Dispose(disposing);
         }
