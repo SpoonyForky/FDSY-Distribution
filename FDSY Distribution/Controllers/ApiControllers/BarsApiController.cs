@@ -16,6 +16,10 @@ namespace FDSY_Distribution.Controllers.ApiControllers
     {
         private BeerContext db = new BeerContext();
 
+        /// <summary>
+        /// Get's all Bars
+        /// </summary>
+        /// <returns></returns>
         // GET: api/BarsApi
         public IQueryable<Bar> GetBars()
         {
@@ -23,7 +27,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         }
 
         /// <summary>
-        /// Gets a Bar
+        /// Gets a Bar based off of the id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

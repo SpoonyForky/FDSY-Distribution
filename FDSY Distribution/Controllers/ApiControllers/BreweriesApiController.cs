@@ -44,7 +44,12 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return Ok(brewery);
         }
 
-        //PUTs a Brewary
+        /// <summary>
+        /// PUT's a Brewary
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="brewery"></param>
+        /// <returns></returns>
         // PUT: api/BreweriesApi/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBrewery(int id, Brewery brewery)
@@ -102,7 +107,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
 
 
         /// <summary>
-        /// DELET's a Brewarie based off of the id
+        /// DELETE's a Brewarie based off of the id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

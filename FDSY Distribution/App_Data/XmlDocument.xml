@@ -481,5 +481,96 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BarsApiController.GetBar(System.Int32)">
+            <summary>
+            Gets a Bar
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BarsApiController.PutBar(System.Int32,FDSY_Distribution.Models.Bar)">
+            <summary>
+            Put's a new Bar
+            </summary>
+            <param name="id"></param>
+            <param name="bar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BarsApiController.PostBar(FDSY_Distribution.Models.Bar)">
+            <summary>
+            POST's a new Bar
+            </summary>
+            <param name="bar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BarsApiController.DeleteBar(System.Int32)">
+            <summary>
+            Delete's a bar
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BeersApiController.GetBeers">
+            <summary>
+            Get's a new Beer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BeersApiController.GetBeer(System.Int32)">
+            <summary>
+            Return's a Beer based on the Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BeersApiController.PutBeer(System.Int32,FDSY_Distribution.Models.Beer)">
+            <summary>
+            PUTs a Beer
+            </summary>
+            <param name="id"></param>
+            <param name="beer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BeersApiController.PostBeer(FDSY_Distribution.Models.Beer)">
+            <summary>
+            POST's a beer
+            </summary>
+            <param name="beer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BeersApiController.DeleteBeer(System.Int32)">
+            <summary>
+            Delete's a Beer based on the ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BreweriesApiController.GetBreweries">
+            <summary>
+            GET's Brewaries
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BreweriesApiController.GetBrewery(System.Int32)">
+            <summary>
+            GET's a Brewary based off of the id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BreweriesApiController.PostBrewery(FDSY_Distribution.Models.Brewery)">
+            <summary>
+            POST's a new Brewary
+            </summary>
+            <param name="brewery"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FDSY_Distribution.Controllers.ApiControllers.BreweriesApiController.DeleteBrewery(System.Int32)">
+            <summary>
+            DELET's a Brewarie based off of the id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
