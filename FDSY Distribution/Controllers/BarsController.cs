@@ -10,6 +10,7 @@ using FDSY_Distribution.Models;
 
 namespace FDSY_Distribution.Controllers
 {
+    
     public class BarsController : Controller
     {
         private BeerContext db = new BeerContext();
