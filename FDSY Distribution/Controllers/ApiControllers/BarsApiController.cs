@@ -22,6 +22,11 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return db.Bars;
         }
 
+        /// <summary>
+        /// Gets a Bar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/BarsApi/5
         [ResponseType(typeof(Bar))]
         public IHttpActionResult GetBar(int id)
@@ -35,6 +40,13 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return Ok(bar);
         }
 
+
+        /// <summary>
+        /// Put's a new Bar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bar"></param>
+        /// <returns></returns>
         // PUT: api/BarsApi/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBar(int id, Bar bar)
@@ -70,6 +82,11 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// POST's a new Bar
+        /// </summary>
+        /// <param name="bar"></param>
+        /// <returns></returns>
         // POST: api/BarsApi
         [ResponseType(typeof(Bar))]
         public IHttpActionResult PostBar(Bar bar)
@@ -85,6 +102,11 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return CreatedAtRoute("DefaultApi", new { id = bar.StoreId }, bar);
         }
 
+        /// <summary>
+        /// Delete's a bar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // DELETE: api/BarsApi/5
         [ResponseType(typeof(Bar))]
         public IHttpActionResult DeleteBar(int id)

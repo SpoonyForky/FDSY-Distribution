@@ -16,12 +16,21 @@ namespace FDSY_Distribution.Controllers.ApiControllers
     {
         private BeerContext db = new BeerContext();
 
+        /// <summary>
+        /// Get's a new Beer
+        /// </summary>
+        /// <returns></returns>
         // GET: api/BeersApi
         public IQueryable<Beer> GetBeers()
         {
             return db.Beers;
         }
 
+        /// <summary>
+        /// Return's a Beer based on the Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/BeersApi/5
         [ResponseType(typeof(Beer))]
         public IHttpActionResult GetBeer(int id)
@@ -35,6 +44,12 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return Ok(beer);
         }
 
+        /// <summary>
+        /// PUTs a Beer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="beer"></param>
+        /// <returns></returns>
         // PUT: api/BeersApi/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBeer(int id, Beer beer)
@@ -70,6 +85,11 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// POST's a beer
+        /// </summary>
+        /// <param name="beer"></param>
+        /// <returns></returns>
         // POST: api/BeersApi
         [ResponseType(typeof(Beer))]
         public IHttpActionResult PostBeer(Beer beer)
@@ -85,6 +105,11 @@ namespace FDSY_Distribution.Controllers.ApiControllers
             return CreatedAtRoute("DefaultApi", new { id = beer.BeerId }, beer);
         }
 
+        /// <summary>
+        /// Delete's a Beer based on the ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // DELETE: api/BeersApi/5
         [ResponseType(typeof(Beer))]
         public IHttpActionResult DeleteBeer(int id)
