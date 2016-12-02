@@ -9,7 +9,7 @@ namespace FDSY_Distribution.Tests.FakeRepositories
 {
     public class FakeBarRepository : IRepository<Bar>
     {
-        private ICollection<Bar> bars;
+        private List<Bar> bars;
 
         public FakeBarRepository()
         {
@@ -24,22 +24,24 @@ namespace FDSY_Distribution.Tests.FakeRepositories
 
         public ICollection<Bar> Get()
         {
-            throw new NotImplementedException();
+            return bars;
         }
 
         public Bar Get(int? id)
         {
-            throw new NotImplementedException();
+            return new Bar() { StoreId = (int)id };
+
         }
 
         public void Post(Bar model)
         {
-            throw new NotImplementedException();
+            bars.Add(model);
         }
 
         public void Put(Bar model)
         {
-            throw new NotImplementedException();
+            bars.Where(d => d.StoreId == model.StoreId).First().Name = "Monahans";
+            
         }
     }
 }

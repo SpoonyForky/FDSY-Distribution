@@ -14,16 +14,29 @@ namespace FDSY_Distribution.Controllers.ApiControllers
 {
     public class BarsApiController : ApiController
     {
-        private BeerContext db = new BeerContext();
+        //   private BeerContext db = new BeerContext();
+
+
+        private IRepository<Bar> repo;
+
+        public BarsApiController(IRepository<Bar> _repo)
+        {
+            this.repo = _repo;
+        }
+
+        public BarsApiController() : this(new BarRepository())
+        {
+
+        }
 
         /// <summary>
         /// Returns all bars
         /// </summary>
         /// <returns></returns>
         // GET: api/BarsApi
-        public IQueryable<Bar> GetBars()
+        public ICollection<Bar> GetBars()
         {
-            return db.Bars;
+            return repo.Get();
         }
 
         /// <summary>
@@ -35,7 +48,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         [ResponseType(typeof(Bar))]
         public IHttpActionResult GetBar(int id)
         {
-            Bar bar = db.Bars.Find(id);
+            Bar bar = repo.Get(id);
             if (bar == null)
             {
                 return NotFound();
@@ -65,11 +78,9 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(bar).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                repo.Put(bar);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -100,8 +111,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.Bars.Add(bar);
-            db.SaveChanges();
+            repo.Post(bar);
 
             return CreatedAtRoute("DefaultApi", new { id = bar.StoreId }, bar);
         }
@@ -115,14 +125,13 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         [ResponseType(typeof(Bar))]
         public IHttpActionResult DeleteBar(int id)
         {
-            Bar bar = db.Bars.Find(id);
+           Bar bar = repo.Get(id);
             if (bar == null)
             {
                 return NotFound();
             }
 
-            db.Bars.Remove(bar);
-            db.SaveChanges();
+            repo.Delete(id);
 
             return Ok(bar);
         }
@@ -131,14 +140,14 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         {
             if (disposing)
             {
-                db.Dispose();
+               // db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool BarExists(int id)
         {
-            return db.Bars.Count(e => e.StoreId == id) > 0;
+            return (repo.Get(id) != null);
         }
     }
 }
