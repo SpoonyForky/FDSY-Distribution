@@ -9,21 +9,35 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using FDSY_Distribution.Models;
-
+using FDSY_Distribution.Models.Repositories;
 namespace FDSY_Distribution.Controllers.ApiControllers
 {
     public class BreweriesApiController : ApiController
     {
-        private BeerContext db = new BeerContext();
+        //  private BeerContext db = new BeerContext();
+
+
+        private IRepository<Brewery> repo;
+
+        public BreweriesApiController(IRepository<Brewery> _repo)
+        {
+            this.repo = _repo;
+        }
+
+        public BreweriesApiController() : this(new BrewaryRepository())
+        {
+
+        }
+
 
         /// <summary>
         /// Returns all Breweries
         /// </summary>
         /// <returns></returns>
         // GET: api/BreweriesApi
-        public IQueryable<Brewery> GetBreweries()
+        public ICollection<Brewery> GetBreweries()
         {
-            return db.Breweries;
+           return repo.Get();
         }
 
         /// <summary>
@@ -35,7 +49,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         [ResponseType(typeof(Brewery))]
         public IHttpActionResult GetBrewery(int id)
         {
-            Brewery brewery = db.Breweries.Find(id);
+            Brewery brewery = repo.Get(id);
             if (brewery == null)
             {
                 return NotFound();
@@ -64,11 +78,10 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(brewery).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                repo.Put(brewery);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -99,8 +112,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.Breweries.Add(brewery);
-            db.SaveChanges();
+            repo.Post(brewery);
 
             return CreatedAtRoute("DefaultApi", new { id = brewery.BreweryId }, brewery);
         }
@@ -115,14 +127,13 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         [ResponseType(typeof(Brewery))]
         public IHttpActionResult DeleteBrewery(int id)
         {
-            Brewery brewery = db.Breweries.Find(id);
+            Brewery brewery = repo.Get(id);
             if (brewery == null)
             {
                 return NotFound();
             }
 
-            db.Breweries.Remove(brewery);
-            db.SaveChanges();
+            repo.Delete(id);
 
             return Ok(brewery);
         }
@@ -131,14 +142,14 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         {
             if (disposing)
             {
-                db.Dispose();
+               // db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool BreweryExists(int id)
         {
-            return db.Breweries.Count(e => e.BreweryId == id) > 0;
+            return (repo.Get(id) != null);
         }
     }
 }

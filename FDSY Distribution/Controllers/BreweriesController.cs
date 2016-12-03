@@ -7,17 +7,30 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FDSY_Distribution.Models;
-
+using FDSY_Distribution.Models.Repositories;
 namespace FDSY_Distribution.Controllers
 {
     public class BreweriesController : Controller
     {
-        private BeerContext db = new BeerContext();
+        //   private BeerContext db = new BeerContext();
+
+        private IRepository<Brewery> repo;
+
+        public BreweriesController(IRepository<Brewery> _repo)
+        {
+            this.repo = _repo;
+        }
+
+        public BreweriesController() : this (new BrewaryRepository())
+        {
+
+        }
+
 
         // GET: Breweries
         public ActionResult Index()
         {
-            return View(db.Breweries.ToList());
+            return View(repo.Get());
         }
 
         // GET: Breweries/Details/5
@@ -27,7 +40,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Brewery brewery = db.Breweries.Find(id);
+            Brewery brewery = repo.Get(id);
             if (brewery == null)
             {
                 return HttpNotFound();
@@ -50,8 +63,7 @@ namespace FDSY_Distribution.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Breweries.Add(brewery);
-                db.SaveChanges();
+                repo.Post(brewery);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +77,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Brewery brewery = db.Breweries.Find(id);
+            Brewery brewery = repo.Get(id);
             if (brewery == null)
             {
                 return HttpNotFound();
@@ -82,8 +94,7 @@ namespace FDSY_Distribution.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(brewery).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.Put(brewery);
                 return RedirectToAction("Index");
             }
             return View(brewery);
@@ -96,7 +107,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Brewery brewery = db.Breweries.Find(id);
+            Brewery brewery = repo.Get(id);
             if (brewery == null)
             {
                 return HttpNotFound();
@@ -109,9 +120,8 @@ namespace FDSY_Distribution.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Brewery brewery = db.Breweries.Find(id);
-            db.Breweries.Remove(brewery);
-            db.SaveChanges();
+            repo.Delete(id);
+
             return RedirectToAction("Index");
         }
 
@@ -119,7 +129,7 @@ namespace FDSY_Distribution.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+             //   db.Dispose();
             }
             base.Dispose(disposing);
         }
