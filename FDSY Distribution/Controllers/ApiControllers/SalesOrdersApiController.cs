@@ -9,24 +9,39 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using FDSY_Distribution.Models;
+using FDSY_Distribution.Models.Repositories;
 
 namespace FDSY_Distribution.Controllers.ApiControllers
 {
     public class SalesOrdersApiController : ApiController
     {
-        private BeerContext db = new BeerContext();
+        // private BeerContext db = new BeerContext();
+
+
+        private IRepository<SalesOrder> repo;
+
+        public SalesOrdersApiController(IRepository<SalesOrder> _repo)
+        {
+            this.repo = _repo;
+        }
+
+        public SalesOrdersApiController() : this(new SalesOrderRepository())
+        {
+
+        }
+
 
         // GET: api/SalesOrdersApi
-        public IQueryable<SalesOrder> GetSalesOrders()
+        public ICollection<SalesOrder> GetSalesOrders()
         {
-            return db.SalesOrders;
+            return repo.Get();
         }
 
         // GET: api/SalesOrdersApi/5
         [ResponseType(typeof(SalesOrder))]
         public IHttpActionResult GetSalesOrder(int id)
         {
-            SalesOrder salesOrder = db.SalesOrders.Find(id);
+            SalesOrder salesOrder = repo.Get(id);
             if (salesOrder == null)
             {
                 return NotFound();
@@ -49,11 +64,10 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(salesOrder).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                repo.Put(salesOrder);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,8 +93,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.SalesOrders.Add(salesOrder);
-            db.SaveChanges();
+            repo.Post(salesOrder);
 
             return CreatedAtRoute("DefaultApi", new { id = salesOrder.SalesOrderID }, salesOrder);
         }
@@ -89,14 +102,13 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         [ResponseType(typeof(SalesOrder))]
         public IHttpActionResult DeleteSalesOrder(int id)
         {
-            SalesOrder salesOrder = db.SalesOrders.Find(id);
+            SalesOrder salesOrder = repo.Get(id);
             if (salesOrder == null)
             {
                 return NotFound();
             }
 
-            db.SalesOrders.Remove(salesOrder);
-            db.SaveChanges();
+            repo.Delete(id);
 
             return Ok(salesOrder);
         }
@@ -105,14 +117,14 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         {
             if (disposing)
             {
-                db.Dispose();
+                    //    db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool SalesOrderExists(int id)
         {
-            return db.SalesOrders.Count(e => e.SalesOrderID == id) > 0;
+            return (repo.Get(id) != null);
         }
     }
 }
