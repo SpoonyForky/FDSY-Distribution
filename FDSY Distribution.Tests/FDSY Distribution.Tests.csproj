@@ -108,7 +108,7 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LoadTest1.loadtest">
+    <None Include="FDSY.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
