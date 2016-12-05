@@ -217,6 +217,7 @@
     <Compile Include="Models\BeerContext.cs" />
     <Compile Include="Models\Brewery.cs" />
     <Compile Include="Models\IRepository.cs" />
+    <Compile Include="Models\Repositories\BeerRepository.cs" />
     <Compile Include="Models\Repositories\BrewaryRepository.cs" />
     <Compile Include="Models\Repositories\SalesOrderRepository.cs" />
     <Compile Include="Models\SalesOrder.cs" />

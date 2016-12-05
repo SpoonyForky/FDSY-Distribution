@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using FDSY_Distribution.Models;
+using FDSY_Distribution.Models.Repositories;
 
 namespace FDSY_Distribution.Controllers.ApiControllers
 {
@@ -17,16 +18,25 @@ namespace FDSY_Distribution.Controllers.ApiControllers
     /// </summary>
     public class BeersApiController : ApiController
     {
-        private BeerContext db = new BeerContext();
+        private IRepository<Beer> repo;
 
+        public BeersApiController(IRepository<Beer> _repo)
+        {
+            this.repo = _repo;
+        }
+
+        public BeersApiController() : this(new BeerRepository())
+        {
+
+        }
         /// <summary>
         /// Gets all beers
         /// </summary>
         /// <returns>All beers</returns>
         // GET: api/BeersApi
-        public IQueryable<Beer> GetBeers()
+        public ICollection<Beer> GetBeers()
         {
-            return db.Beers;
+            return repo.Get();
         }
 
         /// <summary>
@@ -38,7 +48,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         [ResponseType(typeof(Beer))]
         public IHttpActionResult GetBeer(int id)
         {
-            Beer beer = db.Beers.Find(id);
+            Beer beer = repo.Get(id);
             if (beer == null)
             {
                 return NotFound();
@@ -67,11 +77,10 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(beer).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                repo.Put(beer);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -102,8 +111,7 @@ namespace FDSY_Distribution.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.Beers.Add(beer);
-            db.SaveChanges();
+            repo.Post(beer);
 
             return CreatedAtRoute("DefaultApi", new { id = beer.BeerId }, beer);
         }
@@ -117,14 +125,13 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         [ResponseType(typeof(Beer))]
         public IHttpActionResult DeleteBeer(int id)
         {
-            Beer beer = db.Beers.Find(id);
+            Beer beer = repo.Get(id);
             if (beer == null)
             {
                 return NotFound();
             }
 
-            db.Beers.Remove(beer);
-            db.SaveChanges();
+            repo.Delete(id);
 
             return Ok(beer);
         }
@@ -132,13 +139,13 @@ namespace FDSY_Distribution.Controllers.ApiControllers
         {
             if (disposing)
             {
-                db.Dispose();
+               // db.Dispose();
             }
             base.Dispose(disposing);
         }
         private bool BeerExists(int id)
         {
-            return db.Beers.Count(e => e.BeerId == id) > 0;
+            return (repo.Get(id) != null); ;
         }
     }
 }
