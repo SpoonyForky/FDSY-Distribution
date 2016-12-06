@@ -198,10 +198,12 @@
     <Compile Include="Controllers\ApiControllers\BarsApiController.cs" />
     <Compile Include="Controllers\ApiControllers\BeersApiController.cs" />
     <Compile Include="Controllers\ApiControllers\BreweriesApiController.cs" />
+    <Compile Include="Controllers\ApiControllers\SalesOrdersApiController.cs" />
     <Compile Include="Controllers\BarsController.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\BreweriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SalesOrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +290,11 @@
     <Content Include="Views\Breweries\Details.cshtml" />
     <Content Include="Views\Breweries\Edit.cshtml" />
     <Content Include="Views\Breweries\Index.cshtml" />
+    <Content Include="Views\SalesOrders\Create.cshtml" />
+    <Content Include="Views\SalesOrders\Delete.cshtml" />
+    <Content Include="Views\SalesOrders\Details.cshtml" />
+    <Content Include="Views\SalesOrders\Edit.cshtml" />
+    <Content Include="Views\SalesOrders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
