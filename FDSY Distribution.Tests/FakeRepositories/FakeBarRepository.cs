@@ -9,37 +9,39 @@ namespace FDSY_Distribution.Tests.FakeRepositories
 {
     public class FakeBarRepository : IRepository<Bar>
     {
-        private List<Bar> repo;
+        private List<Bar> bars;
 
         public FakeBarRepository()
         {
-            repo = new List<Bar>();
+            bars = new List<Bar>();
         }
 
         public void Delete(int? id)
         {
-            repo.Remove(repo.Where(b => b.StoreId == id).First());
+            Bar cheers = bars.Where(g => g.StoreId == id).First();
+            bars.Remove(cheers);
         }
 
         public ICollection<Bar> Get()
         {
-            return repo;
+            return bars;
         }
 
         public Bar Get(int? id)
         {
-            return repo.Where(b => b.StoreId == id).First();
+            return new Bar() { StoreId = (int)id };
+
         }
 
-        public void Post(Bar _bar)
+        public void Post(Bar model)
         {
-            repo.Add(_bar);
+            bars.Add(model);
         }
 
-        public void Put(Bar _bar)
+        public void Put(Bar model)
         {
-            int index = repo.IndexOf(repo.Where(b => b.StoreId == _bar.StoreId).First());
-            repo[index] = _bar;
+            bars.Where(d => d.StoreId == model.StoreId).First().Name = "Monahans";
+            
         }
     }
 }

@@ -9,36 +9,37 @@ namespace FDSY_Distribution.Tests.FakeRepositories
 {
     class FakeBeerRepository : IRepository<Beer>
     {
-        private List<Beer> repo;
+        private List<Beer> beers;
 
         public FakeBeerRepository()
         {
-            repo = new List<Beer>();
+            beers = new List<Beer>();
         }
         public void Delete(int? id)
         {
-            repo.Remove(repo.Where(z => z.BeerId == id).First());
+            Beer cheersBeers = beers.Where(z => z.BeerId == id).First();
+            beers.Remove(cheersBeers);
         }
 
         public ICollection<Beer> Get()
         {
-            return repo;
+            return beers;
         }
 
         public Beer Get(int? id)
         {
-            return repo.Where(b => b.BeerId == id).First();
+            return new Beer() { BeerId = (int)id };
+            
         }
 
-        public void Post(Beer _beer)
+        public void Post(Beer model)
         {
-            repo.Add(_beer);
+            beers.Add(model);
         }
 
-        public void Put(Beer _beer)
+        public void Put(Beer model)
         {
-            int index = repo.IndexOf(repo.Where(b => b.BeerId == _beer.BeerId).First());
-            repo[index] = _beer;
+            beers.Where(z => z.BeerId == model.BeerId).First().Name = "Blake Chugging Blue";
         }
     }
 }

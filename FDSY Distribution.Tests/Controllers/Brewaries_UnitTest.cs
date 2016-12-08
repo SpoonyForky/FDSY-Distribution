@@ -12,12 +12,12 @@ using System.Web.Http;
 namespace FDSY_Distribution.Tests.Controllers
 {
     [TestClass]
-    public class Breweries_UnitTest
+    public class Brewaries_UnitTest
     {
         [TestMethod]
         public void BrewariesController_AddAction()
         {
-            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBrewaryRepository());
 
             Brewery brew = new Brewery()
             {
@@ -36,26 +36,26 @@ namespace FDSY_Distribution.Tests.Controllers
 
 
         [TestMethod]
-        public void BreweriesController_GetOne()
+        public void BrewariesController_GetOne()
         {
-            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBrewaryRepository());
             ViewResult result = controller.Details(5) as ViewResult;
             Assert.IsNotNull(result);
 
         }
 
         [TestMethod]
-        public void BreweriesController_GetAll()
+        public void BrewariesController_GetAll()
         {
-            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBrewaryRepository());
             ViewResult result = controller.Index() as ViewResult;
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void BreweriesController_Delete()
+        public void BrewariesController_Delete()
         {
-            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBrewaryRepository());
 
             Brewery brew = new Brewery()
             {
@@ -78,9 +78,9 @@ namespace FDSY_Distribution.Tests.Controllers
         }
 
         [TestMethod]
-        public void BreweriesController_Edit()
+        public void BrewariesController_Edit()
         {
-            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesController controller = new BreweriesController(new FakeRepositories.FakeBrewaryRepository());
 
             Brewery brew = new Brewery()
             {
@@ -102,7 +102,7 @@ namespace FDSY_Distribution.Tests.Controllers
         [TestMethod]
         public void BreweriesApiController_GetOne()
         {
-            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBrewaryRepository());
             OkNegotiatedContentResult<Brewery> result = controller.GetBrewery(1) as OkNegotiatedContentResult<Brewery>;
             Assert.IsNotNull(result);
 
@@ -111,7 +111,7 @@ namespace FDSY_Distribution.Tests.Controllers
         [TestMethod]
         public void BreweriesApiController_GetAll()
         {
-            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBrewaryRepository());
             var result = controller.GetBreweries() as List<Brewery>;
             Assert.IsNotNull(result);
 
@@ -121,7 +121,7 @@ namespace FDSY_Distribution.Tests.Controllers
         [TestMethod]
         public void BrewariesApiController_Delete()
         {
-            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBrewaryRepository());
 
             Brewery brew = new Brewery()
             {
@@ -140,9 +140,9 @@ namespace FDSY_Distribution.Tests.Controllers
         }
 
         [TestMethod]
-        public void BreweriesApiController_Edit()
+        public void BrewariesApiController_Edit()
         {
-            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBreweryRepository());
+            BreweriesApiController controller = new BreweriesApiController(new FakeRepositories.FakeBrewaryRepository());
 
             Brewery brew = new Brewery()
             {

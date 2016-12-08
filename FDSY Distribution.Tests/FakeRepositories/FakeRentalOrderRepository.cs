@@ -13,37 +13,37 @@ namespace FDSY_Distribution.Tests.FakeRepositories
 {
     public class FakeRentalOrderRepository : IRepository<SalesOrder>
     {
-        private List<SalesOrder> repo;
+        private List<SalesOrder> so;
 
         public FakeRentalOrderRepository()
         {
-            repo = new List<SalesOrder>();
+            so = new List<SalesOrder>();
         }
 
         public void Delete(int? id)
         {
-            repo.Remove(repo.Where(g => g.SalesOrderID == id).First());
+            SalesOrder mySale = so.Where(g => g.SalesOrderID == id).First();
+            so.Remove(mySale);
         }
 
         public ICollection<SalesOrder> Get()
         {
-            return repo;
+            return so;
         }
 
         public SalesOrder Get(int? id)
         {
-            return repo.Where(s => s.SalesOrderID == id).First();
+            return new SalesOrder() { SalesOrderID = (int)id };
         }
 
-        public void Post(SalesOrder _salesOrder)
+        public void Post(SalesOrder model)
         {
-            repo.Add(_salesOrder);
+            so.Add(model);
         }
 
-        public void Put(SalesOrder _salesOrder)
+        public void Put(SalesOrder model)
         {
-            int index = repo.IndexOf(repo.Where(s => s.SalesOrderID == _salesOrder.SalesOrderID).First());
-            repo[index] = _salesOrder;
+            so.Where(d => d.SalesOrderID == model.SalesOrderID).First().TotalPrice = "4000";
         }
     }
 }

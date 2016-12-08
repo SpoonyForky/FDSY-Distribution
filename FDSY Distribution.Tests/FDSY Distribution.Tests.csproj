@@ -122,10 +122,10 @@
   <ItemGroup>
     <Compile Include="Controllers\Bars_UnitTest.cs" />
     <Compile Include="Controllers\Beer_UnitTest.cs" />
-    <Compile Include="Controllers\Breweries_UnitTest.cs" />
+    <Compile Include="Controllers\Brewaries_UnitTest.cs" />
     <Compile Include="FakeRepositories\FakeBarRepository.cs" />
     <Compile Include="FakeRepositories\FakeBeerRepository.cs" />
-    <Compile Include="FakeRepositories\FakeBreweryRepository.cs" />
+    <Compile Include="FakeRepositories\FakeBrewaryRepository.cs" />
     <Compile Include="FakeRepositories\FakeRentalOrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
