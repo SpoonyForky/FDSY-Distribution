@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Local.testsettings = Local.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDSY Coded UI Test Project", "FDSY Coded UI Test Project\FDSY Coded UI Test Project.csproj", "{1BB1DF4A-18EC-4391-A25B-161D10A5E186}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{9AD9A696-E311-4957-B603-F8C9AC257C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AD9A696-E311-4957-B603-F8C9AC257C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AD9A696-E311-4957-B603-F8C9AC257C52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB1DF4A-18EC-4391-A25B-161D10A5E186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB1DF4A-18EC-4391-A25B-161D10A5E186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB1DF4A-18EC-4391-A25B-161D10A5E186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB1DF4A-18EC-4391-A25B-161D10A5E186}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
