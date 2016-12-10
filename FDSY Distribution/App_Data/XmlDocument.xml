@@ -591,5 +591,10 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:FDSY_Distribution.Controllers.HomeController">
+            <summary>
+            Controller for Home
+            </summary>
+        </member>
     </members>
 </doc>
