@@ -25,6 +25,7 @@ namespace FDSY_Distribution.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Title = "Home";
             Random rnd = new Random();
             List<Beer> _beers = repo.Get().ToList();
             int beerIndex = rnd.Next(0, _beers.Count);
