@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Take a look at the beers we distribute at FDSY, we're sure you'll enjoy each and every one of them.</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Brewery.Name)
+            Brewery
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
+            Price
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -35,10 +35,10 @@
             @Html.DisplayFor(modelItem => item.Brewery.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
+            $@Html.DisplayFor(modelItem => item.UnitPrice)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Type)
