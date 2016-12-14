@@ -80,11 +80,11 @@ namespace FDSY_Distribution.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Beer beer = repo.Get(id);
-            ViewBag.BreweryBreweryId = new SelectList(db.Breweries, "BreweryId", "Name", beer.BreweryBreweryId);
             if (beer == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.BreweryBreweryId = new SelectList(db.Breweries, "BreweryId", "Name", beer.BreweryBreweryId);
             return View(beer);
         }
 
