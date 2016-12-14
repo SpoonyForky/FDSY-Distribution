@@ -11,11 +11,11 @@ using FDSY_Distribution.Models;
 
 namespace FDSY_Distribution.Tests.FakeRepositories
 {
-    public class FakeRentalOrderRepository : IRepository<SalesOrder>
+    public class FakeSalesOrderRepository : IRepository<SalesOrder>
     {
         private List<SalesOrder> so;
 
-        public FakeRentalOrderRepository()
+        public FakeSalesOrderRepository()
         {
             so = new List<SalesOrder>();
         }
