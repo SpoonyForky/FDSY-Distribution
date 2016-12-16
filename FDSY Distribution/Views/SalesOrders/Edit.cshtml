@@ -18,14 +18,6 @@
         @Html.HiddenFor(model => model.SalesOrderID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Beer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Beer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Beer, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Units, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Units, new { htmlAttributes = new { @class = "form-control" } })

@@ -7,33 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FDSY_Distribution.Models;
-using FDSY_Distribution.Models.Repositories;
 
 namespace FDSY_Distribution.Controllers
 {
     public class SalesOrdersController : Controller
     {
-        // private BeerContext db = new BeerContext();
-
-        private IRepository<SalesOrder> repo;
-
-  
-        public SalesOrdersController(IRepository<SalesOrder> _repo)
-        {
-            this.repo = _repo;
-        }
-
-        public SalesOrdersController() : this (new SalesOrderRepository())
-        {
-
-        }
-
-
+        private BeerContext db = new BeerContext();
 
         // GET: SalesOrders
         public ActionResult Index()
         {
-            return View(repo.Get());
+            var salesOrders = db.SalesOrders.Include(s => s.Brewery);
+            return View(salesOrders.ToList());
         }
 
         // GET: SalesOrders/Details/5
@@ -43,7 +28,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SalesOrder salesOrder = repo.Get(id);
+            SalesOrder salesOrder = db.SalesOrders.Find(id);
             if (salesOrder == null)
             {
                 return HttpNotFound();
@@ -54,6 +39,7 @@ namespace FDSY_Distribution.Controllers
         // GET: SalesOrders/Create
         public ActionResult Create()
         {
+            ViewBag.Brewery_BreweryId = new SelectList(db.Breweries, "BreweryId", "Name");
             return View();
         }
 
@@ -62,13 +48,16 @@ namespace FDSY_Distribution.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SalesOrderID,Beer,Units,TotalPrice,Brewery_BreweryId")] SalesOrder salesOrder)
+        public ActionResult Create([Bind(Include = "SalesOrderID,Units,TotalPrice,Brewery_BreweryId")] SalesOrder salesOrder)
         {
             if (ModelState.IsValid)
             {
-                repo.Post(salesOrder);
+                db.SalesOrders.Add(salesOrder);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Brewery_BreweryId = new SelectList(db.Breweries, "BreweryId", "Name", salesOrder.Brewery_BreweryId);
             return View(salesOrder);
         }
 
@@ -79,11 +68,12 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SalesOrder salesOrder = repo.Get(id);
+            SalesOrder salesOrder = db.SalesOrders.Find(id);
             if (salesOrder == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Brewery_BreweryId = new SelectList(db.Breweries, "BreweryId", "Name", salesOrder.Brewery_BreweryId);
             return View(salesOrder);
         }
 
@@ -92,13 +82,15 @@ namespace FDSY_Distribution.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SalesOrderID,Beer,Units,TotalPrice,Brewery_BreweryId")] SalesOrder salesOrder)
+        public ActionResult Edit([Bind(Include = "SalesOrderID,Units,TotalPrice,Brewery_BreweryId")] SalesOrder salesOrder)
         {
             if (ModelState.IsValid)
             {
-                repo.Put(salesOrder);
+                db.Entry(salesOrder).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Brewery_BreweryId = new SelectList(db.Breweries, "BreweryId", "Name", salesOrder.Brewery_BreweryId);
             return View(salesOrder);
         }
 
@@ -109,7 +101,7 @@ namespace FDSY_Distribution.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SalesOrder salesOrder = repo.Get(id);
+            SalesOrder salesOrder = db.SalesOrders.Find(id);
             if (salesOrder == null)
             {
                 return HttpNotFound();
@@ -122,7 +114,9 @@ namespace FDSY_Distribution.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            repo.Delete(id);
+            SalesOrder salesOrder = db.SalesOrders.Find(id);
+            db.SalesOrders.Remove(salesOrder);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -130,7 +124,7 @@ namespace FDSY_Distribution.Controllers
         {
             if (disposing)
             {
-              //  db.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

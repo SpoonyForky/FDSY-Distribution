@@ -16,9 +16,7 @@ namespace FDSY_Distribution.Models
 
         public int SalesOrderID { get; set; }
 
-        [Required]
-        public string Beer { get; set; }
-
+ 
         [Required]
         public string Units { get; set; }
 

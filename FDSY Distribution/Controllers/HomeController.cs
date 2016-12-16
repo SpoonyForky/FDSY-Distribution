@@ -29,9 +29,8 @@ namespace FDSY_Distribution.Controllers
             Random rnd = new Random();
             List<Beer> _beers = repo.Get().ToList();
             int beerIndex = rnd.Next(0, _beers.Count);
-
-
             return View(_beers[beerIndex]);
+
         }
     }
 }
